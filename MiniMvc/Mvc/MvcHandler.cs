@@ -17,7 +17,9 @@ namespace MiniMvc.Mvc {
             Type controllerType = GetControllerType(controllerName);
             if (controllerType == null) return;
             //IController controller = (IController)Activator.CreateInstance("MiniMvc", controllerName);
-            IController controller = (IController)Activator.CreateInstance(controllerType);
+            //IController controller = (IController)Activator.CreateInstance(controllerType);
+            IControllerFactory factory = ControllerBuilder.Current.GetControllerFactory();
+            IController controller = factory.CreateController(RequestContext, RequestContext.RouteData.Controller);
             controller.Execute(RequestContext);
         }
         private Type GetControllerType(string controllerName) {

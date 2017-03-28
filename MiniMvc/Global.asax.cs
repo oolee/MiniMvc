@@ -1,4 +1,5 @@
-﻿using MiniMvc.Routing;
+﻿using MiniMvc.Mvc;
+using MiniMvc.Routing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace MiniMvc {
 
         protected void Application_Start(object sender, EventArgs e) {
             RouteTable.Routes.Add(new Route { Url="{controller}/{action}"});
+            ControllerBuilder.Current.SetControllerFactory(new DefaultControllerFactory());
         }
 
         protected void Session_Start(object sender, EventArgs e) {
